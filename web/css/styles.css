@@ -7,19 +7,19 @@ button {
 	cursor: pointer;
 	outline: none;
 	color: #fff;
-	background-color: #6666ff;
+	background-color: #FF6363;
 	border: none;
 	border-radius: 15px;
 	box-shadow: 0 9px #999;
 	width: 20%;
 }
 button:hover {
-	background-color: #8080ff;
+	background-color: #F50000;
 	outline: none;
 }
 
 button:active {
-  background-color: #6600ff;
+  background-color: #FF6363;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
   outline: none;
