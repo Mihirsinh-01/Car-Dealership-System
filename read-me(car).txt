@@ -1,0 +1,27 @@
+register
+	customer
+
+login
+	customer
+	admin
+
+Order
+	My order (along with unique order id)
+	track
+	cancle
+
+
+Search 
+	sort
+		price
+		company
+
+Customer
+	add details of car (Sell)
+	select car (Buy)
+	Bill- after buying the car
+
+Admin
+	transaction (History)
+	total balance
+
