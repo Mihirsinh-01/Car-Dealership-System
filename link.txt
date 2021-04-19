@@ -1,4 +1,0 @@
-https://github.com/Mihirsinh-01/Car-Dealership-System.git
-git commit -m "Initial Commi"
-git add .
-git push
