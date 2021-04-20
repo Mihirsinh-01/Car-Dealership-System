@@ -23,6 +23,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -68,6 +69,9 @@ public class login implements Servlet {
                 rs = st.executeQuery(check);
                 while(rs.next()){
                     flag=1;
+                    HttpServletRequest re=(HttpServletRequest) req;
+                    HttpSession session=re.getSession();
+                    session.setAttribute("username", name);
                     RequestDispatcher rd = req.getRequestDispatcher("sellingForm.jsp");
                     rd.include(req, res);
                 }

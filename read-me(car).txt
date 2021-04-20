@@ -25,3 +25,11 @@ Admin
 	transaction (History)
 	total balance
 
+
+
+
+DATABASE 
+	CARINFO
+		Status 1 - sell
+		       0 - buy
+
