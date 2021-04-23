@@ -44,6 +44,7 @@ public class register implements Servlet {
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         res.setContentType("text/html");
+        PrintWriter out=res.getWriter();
         
         String jdbcurl="jdbc:derby://localhost:1527/CarDealership";
         String username = "car";
@@ -56,41 +57,88 @@ public class register implements Servlet {
             Statement st = Con.createStatement();
         
             System.out.println("Connection Created");
-
+            
             String name=req.getParameter("username");
             String email=req.getParameter("email");
             String pass=req.getParameter("password");
             String confirm_pass=req.getParameter("confirm_password");
             System.out.println(name);
             System.out.println(email);
+            
+            RequestDispatcher rd = req.getRequestDispatcher("register.html");
+            rd.include(req, res);
 
-            String check="SELECT * FROM CAR.\"LOGIN\" WHERE USERNAME ='"+name+"'";
-            ResultSet rs;
-            int flag=0;
-            try {
-                rs = st.executeQuery(check);
-                while(rs.next()){
-                    flag=1;
-                    PrintWriter out=res.getWriter();
-                    out.print("<script>alert(\"Username is already exists !!!\");</script>");
-                    RequestDispatcher rd = req.getRequestDispatcher("register.html");
-                    rd.include(req, res);   
-                    break;
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+            
+            out.print("<script>"
+                    + "document.getElementById(\"username\").value=\""+ name+"\";"
+                    + "document.getElementById(\"email\").value=\""+ email+"\";"
+                    + "document.getElementById(\"password\").value=\""+ pass+"\";"
+                    + "</script>");
+            
+            Boolean submit=true;
+            if(!username_validation1(name)){
+                submit=false;
+                out.print("<script>"
+                    + "document.getElementById(\"msg1\").innerHTML=\"First character should be alphabet !!!\";"
+                    + "</script>");
+            }
+            else if(!username_validation2(name)){
+                submit=false;
+                out.print("<script>"
+                    + "document.getElementById(\"msg1\").innerHTML=\"Only Alphabets, digit and _ are allowed !!!\";"
+                    + "</script>");
+            }
+            
+            if(!email_validation(email)){
+                submit=false;
+                out.print("<script>"
+                    + "document.getElementById(\"msg2\").innerHTML=\"Email Id is not valid !!!\";"
+                    + "</script>");
+            }
+            if(pass.length()<8){
+                submit=false;
+                out.print("<script>"
+                    + "document.getElementById(\"msg3\").innerHTML=\"Length of password should atleast 8 !!!\";"
+                    + "</script>");
+            }
+            if(!pass.equals(confirm_pass)){
+                submit=false;
+                out.print("<script>"
+                    + "document.getElementById(\"msg4\").innerHTML=\"Password and confirm password should be matched !!!\";"
+                    + "</script>");
             }
 
-            if(flag==0){
-                String query="INSERT INTO CAR.\"LOGIN\" VALUES('"+name+"','"+pass+"','"+email+"')";
+            if(submit){
+                String check="SELECT * FROM CAR.\"LOGIN\" WHERE USERNAME ='"+name+"'";
+                ResultSet rs;
+                int flag=0;
                 try {
-                    st.executeUpdate(query);
+                    rs = st.executeQuery(check);
+                    while(rs.next()){
+                        flag=1;
+                        out.print("<script>"
+                        + "document.getElementById(\"msg1\").innerHTML=\"Username is already exists !!!\";"
+                        + "</script>");
+    //                    out.print("<script>alert(\"Username is already exists !!!\");</script>");
+    //                    rd = req.getRequestDispatcher("register.html");
+    //                    rd.include(req, res);   
+                        break;
+                    }
                 } catch (SQLException ex) {
-                    System.out.println("error");
+                    Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                RequestDispatcher rd = req.getRequestDispatcher("login.html");
-                rd.forward(req, res);
+                if(flag==0){
+                    String query="INSERT INTO CAR.\"LOGIN\" VALUES('"+name+"','"+pass+"','"+email+"')";
+                    try {
+                        st.executeUpdate(query);
+                    } catch (SQLException ex) {
+                        System.out.println("error");
+                    }
+
+                    rd = req.getRequestDispatcher("login.html");
+                    rd.forward(req, res);
+                }
             }
         } catch (SQLException ex) {
             System.out.println("klnjk");
@@ -99,6 +147,20 @@ public class register implements Servlet {
             System.out.println("hiihih");
         }
         
+    }
+    static boolean username_validation1(String username) {
+        String regex = "^[a-zA-Z].*$";
+        return username.matches(regex);
+    }
+    
+    static boolean username_validation2(String username) {
+        String regex = "^[a-zA-Z][a-zA-Z0-9_]*$";
+        return username.matches(regex);
+    }
+    
+    static boolean email_validation(String email) {
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
     }
 
     @Override
