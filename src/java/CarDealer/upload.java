@@ -92,7 +92,7 @@ public class upload extends HttpServlet {
                 if(x!=array.get(i))break;
             }
             String filePath=path+(x.toString()+".jpeg");
-            car_image_array.add(filePath);
+            car_image_array.add(x.toString()+".jpeg");
 //            System.out.println(x+"value");
             InputStream is=part.getInputStream();
             File file=new File(filePath);
