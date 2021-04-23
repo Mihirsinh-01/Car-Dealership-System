@@ -125,11 +125,12 @@ public class upload extends HttpServlet {
                 else{
                     String car_image=String.join(";",car_image_array); 
                     String query="INSERT INTO CAR.\"CARINFO\" VALUES('"+number_plate+"','"+u_name+"',true,"+model_year+
-                           ",'"+company_name+"','"+model_name+"',"+mileage+",'"+car_image+"',"+price+","+kilometer+")";
+                           ",'"+company_name+"','"+model_name+"',"+mileage+",'"+car_image+"',"+price+","+kilometer+",\'Diesel\')";
                    
                     try {
                         st.executeUpdate(query);
                     } catch (SQLException ex) {
+                        System.out.println(query);
                         System.out.println("error");
                     }
 

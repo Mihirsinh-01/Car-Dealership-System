@@ -72,7 +72,7 @@ public class login implements Servlet {
                     HttpServletRequest re=(HttpServletRequest) req;
                     HttpSession session=re.getSession();
                     session.setAttribute("username", name);
-                    RequestDispatcher rd = req.getRequestDispatcher("sellingForm.jsp");
+                    RequestDispatcher rd = req.getRequestDispatcher("dashboard.jsp");
                     rd.include(req, res);
                 }
                 if(flag==0){
