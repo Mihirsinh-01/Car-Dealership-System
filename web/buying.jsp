@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,10 +16,64 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/dropdown.css">
+        <style>
+            .right{
+                position: absolute;
+                right: 1%;
+                top: 25%;
+            }
+            .left{
+                position: absolute;
+                left: 1%;
+                top: 25%;
+            }
+        </style>
     </head>
     <body>
-        <%
-            
-        %>
+        <%@ include file="include/navigation.html" %>
+        <div style="width: available; height: 50%; background: linear-gradient(to bottom, #ffffff 0%, #ff0000 100%); padding: 20px;">            
+            <div class="right"><a onclick="change(1)"><img src="https://img.icons8.com/ios/50/000000/forward-arrow.png"/></a></div>
+            <div class="left"><a onclick="change(-1)"><img src="https://img.icons8.com/ios/50/000000/reply-arrow.png"/></a></div>
+            <sql:setDataSource var="db" driver="org.apache.derby.jdbc.ClientDriver"  
+            url="jdbc:derby://localhost:1527/CarDealership"  
+            user="car"  password="car"/>
+            <sql:query dataSource="${db}" var="rs">  
+                SELECT * from CAR.CARINFO WHERE NUMBER_PLATE='<c:out value="${param.number_plate}"/>'
+            </sql:query>
+            <c:forEach var="table" items="${rs.rows}">
+                <c:forTokens items = "<c:out value='${table.CAR_IMAGE}'/>" delims = ";" var = "name">                    
+                    <div class="imgs">
+                        <img src='files/${name}' alt="Car image">
+                    </div>
+                </c:forTokens>           
+            </c:forEach>
+        </div>
+        
+        <script>
+            var slide=0;
+            viewChanges(slide);
+            function change(n){
+                slide+=n;            
+                viewChanges(slide);
+            }
+            function viewChanges(n){
+                var i;
+                var x=document.getElementsByClassName("imgs");
+                if(x.length<4){
+                    return;
+                }
+                if(n<0) {n=0;slide=0;}
+                if(n>x.length-3) {n=x.length-3;slide=n;}
+//                if(n>x.length) {slide=0;}
+                for(i=0;i<x.length;i++){
+                    x[i].style.display="none";
+                }
+                var pos=n%x.length;
+                pos=(pos+x.length)%x.length;
+                x[pos].style.display="inline";
+                x[(pos+1)%x.length].style.display="inline";
+                x[(pos+2)%x.length].style.display="inline";
+            }
+        </script>
     </body>
 </html>
