@@ -105,29 +105,3 @@
     </div>
 </body>
 </html>
-
-<!--      <form action = "upload" method = "post"
-         enctype = "multipart/form-data">
-          <input type = "file" name = "file" multiple/>
-         <br />
-         <input type = "submit" value = "Upload File" />
-      </form>
-      <form action="fetch.jsp">
-          <input type = "text" name = "name" /><br/>
-          <input type = "submit" value = "Fill the data" />
-      </form>
-     
-   </body>
-   
-</html>-->
-
-photo
-photo
-company name
-model name
-price
-KM
-number plate
-model year
-mileage
-fuel type

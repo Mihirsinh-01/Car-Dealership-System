@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Dashboard</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -54,7 +54,7 @@
         <div class="left"><a onclick="change(-3)"><i style="font-size: 6vh; color: #fff;" class="fa fa-arrow-circle-left"></i></a></div>
         <div class="upp" >
             <b>Want to Sell Car ?? &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></b>
-            <a class="btn" href="sellingForm.jsp" style="background-color: red; color: white; border-radius: 20px;">Click Here</a>
+            <a class="btn" href="sellingForm.jsp" style="background-color: red; color: white; border-radius: 20px; margin-bottom: 18px;">Click Here</a>
         </div>
         
         <sql:setDataSource var="db" driver="org.apache.derby.jdbc.ClientDriver"  
@@ -89,7 +89,7 @@
                   </tr>
               </table>
               </p>
-              <a href="buying.jsp?<c:out value='${table.NUMBER_PLATE}'/>" class="btn btn-primary">Buy</a>
+              <a href="buying.jsp?number_plate=\"<c:out value='${table.NUMBER_PLATE}'/>\"" class="btn btn-primary">Buy</a>
             </div>
           </div>
         </c:forEach>              

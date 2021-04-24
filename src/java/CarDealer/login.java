@@ -73,8 +73,8 @@ public class login implements Servlet {
                     HttpServletRequest re=(HttpServletRequest) req;
                     HttpSession session=re.getSession();
                     session.setAttribute("username", name);
-                    RequestDispatcher rd = req.getRequestDispatcher("dashboard.jsp");
-                    rd.include(req, res);
+                    HttpServletResponse hsr=(HttpServletResponse)res;
+                    hsr.sendRedirect("dashboard.jsp");
                 }
                 if(flag==0){
                     PrintWriter out=res.getWriter();
