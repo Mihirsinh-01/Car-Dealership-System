@@ -41,44 +41,57 @@
                             <br>
                         </p>
                         <div class="form-group" style="width: 500px;">
-                            <!--<label>Enter Username</label>-->
-                            <input type = "file" class="form-control" id="file" name = "file" multiple/>
+                            <label>Car Image to Display</label>
+                            <input type = "file" class="form-control" id="file1" name = "file1"/>
                             <i><span id="msg1" style="font-size: 12px;"></span></i>
+                        </div>
+                        <div class="form-group" style="width: 500px;">
+                            <label>Other Car Images</label>
+                            <input type = "file" class="form-control" id="file2" name = "file2" multiple/>
+                            <i><span id="msg2" style="font-size: 12px;"></span></i>
                         </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Company Name</label>
                             <input type="text" class="form-control" id="company_name" name="company_name">
-                            <i><span id="msg2" style="font-size: 12px;"></span></i>
+                            <i><span id="msg3" style="font-size: 12px;"></span></i>
                         </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Model_name</label>
                             <input type="text" class="form-control" id="model_name" name="model_name">
-                            <i><span id="msg3" style="font-size: 12px;"></span></i>
+                            <i><span id="msg4" style="font-size: 12px;"></span></i>
                         </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Price</label>
                             <input type="number" min="0" step="0.01" class="form-control" id="price" name="price">
-                            <i><span id="msg4" style="font-size: 12px;"></span></i>
+                            <i><span id="msg5" style="font-size: 12px;"></span></i>
                         </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Kilometer</label>
                             <input type="number" min="0" step="0.01" class="form-control" id="kilometer" name="kilometer">
-                            <i><span id="msg5" style="font-size: 12px;"></span></i>
+                            <i><span id="msg6" style="font-size: 12px;"></span></i>
                         </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Number Plate</label>
                             <input type=text class="form-control" id="number_plate" name="number_plate">
-                            <i><span id="msg6" style="font-size: 12px;"></span></i>
+                            <i><span id="msg7" style="font-size: 12px;"></span></i>
                         </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Model Year</label>
                             <input type="number" step="1" class="form-control" id="model_year" name="model_year">
-                            <i><span id="msg7" style="font-size: 12px;"></span></i>
+                            <i><span id="msg8" style="font-size: 12px;"></span></i>
                         </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Mileage</label>
                             <input type="number" min="0" step="0.01"class="form-control" id="mileage" name="mileage">
-                            <i><span id="msg8" style="font-size: 12px;"></span></i>
+                            <i><span id="msg9" style="font-size: 12px;"></span></i>
+                        </div>
+                        <div class="form-group" style="width: 500px;">
+                            <label>Fuel Type</label><br>
+                            <label class="radio radio-info radio-inline"><input type="radio"  id="petrol" name="fuel_type"  value="Petrol" checked>Petrol</label>
+                            <label class="radio radio-info radio-inline"><input type="radio"  id="diesel" name="fuel_type" value="Diesel">Diesel</label>
+                            <label class="radio radio-info radio-inline"><input type="radio"  id="cng" name="fuel_type" value="CNG">CNG</label>
+                            
+                            <i><span id="msg10" style="font-size: 12px;"></span></i>
                         </div><br>
                         <div class="form-actions">
                             <button type="submit" name="submit" style="padding-top: 0px;">
@@ -107,3 +120,14 @@
    </body>
    
 </html>-->
+
+photo
+photo
+company name
+model name
+price
+KM
+number plate
+model year
+mileage
+fuel type

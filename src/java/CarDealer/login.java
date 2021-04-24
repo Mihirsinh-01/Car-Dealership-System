@@ -46,6 +46,7 @@ public class login implements Servlet {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         res.setContentType("text/html");
         
+        
         String jdbcurl="jdbc:derby://localhost:1527/CarDealership";
         String username = "car";
         String password = "car";

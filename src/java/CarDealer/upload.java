@@ -45,7 +45,6 @@ public class upload extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        
         HttpSession session=request.getSession();
         String u_name=(String)session.getAttribute("username");
         
@@ -61,6 +60,8 @@ public class upload extends HttpServlet {
         String t2=request.getParameter("mileage");
         String t3=request.getParameter("price");
         String t4=request.getParameter("kilometer");
+        String fuel_type=request.getParameter("fuel_type");
+        String display_img="";
         
         Integer model_year=Integer.parseInt(t1);
         Double mileage=Double.parseDouble(t2);
@@ -87,12 +88,18 @@ public class upload extends HttpServlet {
         Integer x=1;
         int i=0;
         for(Part part:request.getParts()){
-            if(!part.getName().equals("file"))continue;
+            if(!part.getName().equals("file1") && !part.getName().equals("file2"))continue;
             for ( ; i < array.size(); i++,x++) {
                 if(x!=array.get(i))break;
             }
             String filePath=path+(x.toString()+".jpeg");
-            car_image_array.add(x.toString()+".jpeg");
+            if(!part.getName().equals("file1")){
+                car_image_array.add(x.toString()+".jpeg");
+            }
+            else{
+                display_img=x.toString()+".jpeg";
+            }
+            
 //            System.out.println(x+"value");
             InputStream is=part.getInputStream();
             File file=new File(filePath);
@@ -125,7 +132,7 @@ public class upload extends HttpServlet {
                 else{
                     String car_image=String.join(";",car_image_array); 
                     String query="INSERT INTO CAR.\"CARINFO\" VALUES('"+number_plate+"','"+u_name+"',true,"+model_year+
-                           ",'"+company_name+"','"+model_name+"',"+mileage+",'"+car_image+"',"+price+","+kilometer+",\'Diesel\')";
+                           ",'"+company_name+"','"+model_name+"',"+mileage+",'"+car_image+"',"+price+","+kilometer+",'"+fuel_type+"','"+display_img+"')";
                    
                     try {
                         st.executeUpdate(query);

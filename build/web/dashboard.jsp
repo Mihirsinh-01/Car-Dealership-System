@@ -66,7 +66,7 @@
         <div class="row" style="margin-left: 4%; margin-top: 5%;">
         <c:forEach var="table" items="${rs.rows}">  
             <div class="card" style="width: 30%; margin: 1%">
-            <img class="card-img-top" src='files/<c:out value="${table.CAR_IMAGE}"/>' alt="Car image">
+            <img class="card-img-top" src='files/<c:out value="${table.DISPLAY_IMAGE}"/>' alt="Car image">
             <div class="card-body">
               <h5 class="card-title"><c:out value="${table.Company_Name}"/></h5>
               <p class="card-text">
@@ -89,7 +89,7 @@
                   </tr>
               </table>
               </p>
-              <a href="#" class="btn btn-primary">Buy</a>
+              <a href="buying.jsp?<c:out value='${table.NUMBER_PLATE}'/>" class="btn btn-primary">Buy</a>
             </div>
           </div>
         </c:forEach>              
