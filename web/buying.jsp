@@ -41,9 +41,9 @@
                 SELECT * from CAR.CARINFO WHERE NUMBER_PLATE='<c:out value="${param.number_plate}"/>'
             </sql:query>
             <c:forEach var="table" items="${rs.rows}">
-                <c:forTokens items = "<c:out value='${table.CAR_IMAGE}'/>" delims = ";" var = "name">                    
+                <c:forTokens items = "${table.CAR_IMAGE}" delims = ";" var = "name">                    
                     <div class="imgs">
-                        <img src='files/${name}' alt="Car image">
+                        <center><img src='files/${name}' alt="Car image"height="500px;"></center>
                     </div>
                 </c:forTokens>           
             </c:forEach>
@@ -59,20 +59,12 @@
             function viewChanges(n){
                 var i;
                 var x=document.getElementsByClassName("imgs");
-                if(x.length<4){
-                    return;
-                }
                 if(n<0) {n=0;slide=0;}
-                if(n>x.length-3) {n=x.length-3;slide=n;}
-//                if(n>x.length) {slide=0;}
+                if(n>=x.length) {n=x.length-1;slide=n;}
                 for(i=0;i<x.length;i++){
                     x[i].style.display="none";
                 }
-                var pos=n%x.length;
-                pos=(pos+x.length)%x.length;
-                x[pos].style.display="inline";
-                x[(pos+1)%x.length].style.display="inline";
-                x[(pos+2)%x.length].style.display="inline";
+                x[n].style.display="inline";
             }
         </script>
     </body>
