@@ -93,12 +93,10 @@ public class upload extends HttpServlet {
                 if(x!=array.get(i))break;
             }
             String filePath=path+(x.toString()+".jpeg");
-            if(!part.getName().equals("file1")){
-                car_image_array.add(x.toString()+".jpeg");
-            }
-            else{
+            if(part.getName().equals("file1")){ 
                 display_img=x.toString()+".jpeg";
             }
+            car_image_array.add(x.toString()+".jpeg");
             
 //            System.out.println(x+"value");
             InputStream is=part.getInputStream();
