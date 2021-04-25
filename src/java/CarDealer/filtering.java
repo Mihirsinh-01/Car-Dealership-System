@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author virad
  */
+@WebServlet(name = "filtering", urlPatterns = {"/filtering"})
 public class filtering extends HttpServlet {
 
     /**
@@ -88,36 +90,9 @@ public class filtering extends HttpServlet {
             query+=")";
             
         }
-        out.print(query);
-//
-
-        try {
-            Class.forName(driverclassname);
-            Connection Con = DriverManager.getConnection(jdbcurl, username, password);
-            Statement st = Con.createStatement();
-
-            System.out.println("Connection Created");
-            ResultSet rs;
-            int flag=0;
-            try {
-                rs = st.executeQuery(query);
-                while(rs.next()){
-                    out.print("avu");
-                }
-
-
-            } catch (SQLException ex) {
-                Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }catch (SQLException ex) {
-//            System.out.println("klnjk");
-        }
-        catch(ClassNotFoundException ex){
-//            System.out.println("hiihih");
-        }
-
-        
-        
+        HttpSession session=request.getSession();
+        session.setAttribute("query",query);
+        response.sendRedirect("dashboard.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

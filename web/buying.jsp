@@ -27,10 +27,27 @@
                 left: 1%;
                 top: 25%;
             }
+            td{
+                padding: 40px;
+                font-size: 30px;
+            }
+            .pr{
+                float: right;
+                font-size: 30px;
+                padding-right: 10%;
+                padding-top: 5%;
+            }
+            .btn{
+                background-color: red;
+                font-size: 30px;
+                border-radius: 20px;
+                margin-top: 10%;
+                width: 250px;
+            }
         </style>
     </head>
-    <body>
-        <%@ include file="include/navigation.html" %>
+    <body style="font-family:'Robosto';">
+        <%@ include file="include/navigation.jsp" %>
         <div style="width: available; height: 50%; background: linear-gradient(to bottom, #ffffff 0%, #ff0000 100%); padding: 20px;">            
             <div class="right"><a onclick="change(1)"><img src="https://img.icons8.com/ios/50/000000/forward-arrow.png"/></a></div>
             <div class="left"><a onclick="change(-1)"><img src="https://img.icons8.com/ios/50/000000/reply-arrow.png"/></a></div>
@@ -47,6 +64,41 @@
                     </div>
                 </c:forTokens>           
             </c:forEach>
+        </div>
+        <div style="padding-left: 50px;">
+            <table style="width: 70%;" border="1">
+                <sql:query dataSource="${db}" var="rs">
+                    SELECT * from CAR.CARINFO WHERE NUMBER_PLATE='<c:out value="${param.number_plate}"/>'
+                </sql:query>
+                <c:forEach var="table" items="${rs.rows}">
+                    <b style="font-size: 40px;">
+                        <c:out value="${table.NUMBER_PLATE}"/> &nbsp;&nbsp;
+                        <c:out value="${table.COMPANY_NAME}"/>
+                        &nbsp;<c:out value="${table.MODEL_NAME}"/>
+                    </b><span style="font-size: 25px;">(<c:out value="${table.FUEL_TYPE}"/>)</span>
+                    <tr>
+                        <td>
+                            <b>Car Seller </b><c:out value="${table.USERNAME}"/>
+                        </td>
+                        <td>
+                            <b>Model Year </b><c:out value="${table.MODEL_YEAR}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Mileage </b><c:out value="${table.MILEAGE}"/> Km/L
+                        </td>
+                        <td>
+                            <b>Total Kilometers </b><c:out value="${table.KILOMETER}"/> Km.
+                        </td>
+                    </tr>
+                    <div class="pr">
+                        <b>Price: </b>₹ <c:out value="${table.PRICE}"/> <br>
+                        <a class="btn"style="color: white;" href="confirmbuy.jsp?number_plate=<c:out value='${table.NUMBER_PLATE}'/>">Confirm Buy</a>
+                    </div>
+                </c:forEach>
+            </table>
+                
         </div>
         
         <script>

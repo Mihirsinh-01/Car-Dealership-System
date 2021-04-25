@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dropdown.css">
     <style type="text/css">
         input:hover{
             border-color: #00ccff;
@@ -21,13 +22,7 @@
     </style>
 </head>
 <body style="font-family: 'Robosto'">
-    <nav class="navbar navbar-light bg-dark navbar-expand">
-      <div class="container-fluid" style=" margin-left: 10%;">
-        <a class="navbar-brand" href="index.html">
-            <font color="white" style="font-size: 30px; font-family: 'Robosto'"><i class="fa fa-car" style="color:#FF6363;"></i>&nbsp;&nbsp;&nbsp;CarDealership</font>
-        </a>
-      </div>
-    </nav>
+    <%@ include file="include/navigation.jsp" %>
     <div style="width: 100%;">
         <div class="row">
             <div><img style="margin-left: 15%; margin-top: 10%;" src="images/register.svg" width="85%"></div>

@@ -118,10 +118,20 @@ public class register implements Servlet {
                         flag=1;
                         out.print("<script>"
                         + "document.getElementById(\"msg1\").innerHTML=\"Username is already exists !!!\";"
-                        + "</script>");
-    //                    out.print("<script>alert(\"Username is already exists !!!\");</script>");
-    //                    rd = req.getRequestDispatcher("register.html");
-    //                    rd.include(req, res);   
+                        + "</script>");   
+                        break;
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                check="SELECT * FROM CAR.\"LOGIN\" WHERE EMAIL ='"+email+"'";
+                try {
+                    rs = st.executeQuery(check);
+                    while(rs.next()){
+                        flag=1;
+                        out.print("<script>"
+                        + "document.getElementById(\"msg2\").innerHTML=\"Email Id is already exists !!!\";"
+                        + "</script>");  
                         break;
                     }
                 } catch (SQLException ex) {

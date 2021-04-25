@@ -43,25 +43,29 @@
                 background-color: #f1f1f1;
                 margin-top: 2%;
                 font-size: 40px;
-                color: black;
-                padding-left: 60%;
             }
         </style>
     </head>
     <body>
-        <%@ include file="include/navigation.html" %>
+        <%@ include file="include/navigation.jsp" %>
         <div class="right"><a onclick="change(3)"><i style="font-size: 6vh; color: #fff;" class="fa fa-arrow-circle-right"></i></a></div>
         <div class="left"><a onclick="change(-3)"><i style="font-size: 6vh; color: #fff;" class="fa fa-arrow-circle-left"></i></a></div>
         <div class="upp" >
-            <b>Want to Sell Car ?? &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></b>
-            <a class="btn" href="sellingForm.jsp" style="background-color: red; color: white; border-radius: 20px; margin-bottom: 18px;">Click Here</a>
+            <a class="btn" href="filtering.jsp" style="width:200px; font-size: 20px; background-color: #F56363; color: white; border-radius: 20px; margin-bottom: 18px;margin-left: 5%;">
+                Filter &nbsp;
+                <i class="fa fa-search"></i>
+            </a>
+            <div style="float:right">
+                <b>Want to Sell Car ?? &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></b>
+                <a class="btn" href="sellingForm.jsp" style="background-color: red; color: white; border-radius: 20px; margin-bottom: 18px;">Click Here</a>
+            </div>
         </div>
         
         <sql:setDataSource var="db" driver="org.apache.derby.jdbc.ClientDriver"  
         url="jdbc:derby://localhost:1527/CarDealership"  
         user="car"  password="car"/>
         <sql:query dataSource="${db}" var="rs">  
-        SELECT * from CAR.CARINFO
+            <%=session.getAttribute("query")%>
         </sql:query> 
         <div class="row" style="margin-left: 4%; margin-top: 5%;">
         <c:forEach var="table" items="${rs.rows}">  
