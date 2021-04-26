@@ -14,12 +14,18 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/dropdown.css">
         <style>
             #print{
                 position: absolute;
                 top: 80%;
+                left: 48%;
+            }
+            #download{
+                position: absolute;
+                bottom:20%;
                 left: 48%;
             }
         </style>
@@ -33,7 +39,8 @@
             <sql:query dataSource="${db}" var="rs">  
                 SELECT * from CAR.CARINFO WHERE NUMBER_PLATE='<c:out value="${param.number_plate}"/>'
             </sql:query>
-                <center><table style="background-color: white; height: 60%; width: 50%; margin-top: 5%;" border="1">
+                <center>
+                    <div><table id="invoice" style="background-color: white; height: 60%; width: 50%; margin-top: 5%;" border="1" >
                     <tr style="height: 100px;">
                     <td colspan="4" style="font-size: 40px; font-weight: bold; color: #F56363">
                     <center>
@@ -42,15 +49,15 @@
                     </td>
                 </tr>
                 <c:forEach var="table" items="${rs.rows}">
-                    <tr style="height: 100px; font-size: 20px;">
-                        <th> Seller </th>
-                        <td><c:out value="${table.username}"/></td>
-                        <th> Buyer </th>
-                        <td><%=session.getAttribute("username")%></td>
+                    <tr style="height: 60px; font-size: 20px;">
+                        <th style="padding: 10px; "> Seller </th>
+                        <td style="padding: 10px;"><c:out value="${table.username}"/></td>
+                        <th style="padding: 10px;"> Buyer </th>
+                        <td style="padding: 10px;"><%=session.getAttribute("username")%></td>
                     </tr>
-                    <tr>
+                    <tr style="height: 300px;">
                         <td colspan="3">
-                            <table style="font-size:20px; width: 50%;">
+                            <table style="font-size:20px; width: 90%;">
                                 <tr><th colspan="2">Car Details</th></tr>
                                 <tr><th>Company Name</th><td><c:out value="${table.company_name}"/></td></tr>
                                 <tr><th>Model Name</th><td><c:out value="${table.model_name}"/></td></tr>
@@ -72,8 +79,27 @@
                         <td colspan="4"><center>In case of any query contact <a href="#">support.cardealership@gmail.com</a></center></td>
                     </tr>
                 </c:forEach>
-                    <a href="#" class="btn btn-primary" id="print">Print Receipt</a>
-                    </table></center>
+                    
+                    </table>
+                    </div></center>
+                <a class="btn btn-primary" style="color: white;" id="download">Print Receipt</a>                    
         </div>
+            <script>
+                window.onload = function () {
+                    document.getElementById("download")
+                        .addEventListener("click", () => {
+                            const invoice = this.document.getElementById("invoice");
+                            console.log(invoice);
+                            console.log(window);
+                            var opt = {
+                                margin: 50,
+                                filename: 'CarDealershipBillReceipt.pdf',
+                                html2canvas: { scale: 1 },
+                                jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' }
+                            };
+                            html2pdf().from(invoice).set(opt).save();
+                        })
+                }
+            </script>
     </body>
 </html>

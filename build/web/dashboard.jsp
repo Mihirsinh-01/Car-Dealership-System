@@ -22,7 +22,7 @@
 		    background: transparent;  /* Optional: just make scrollbar invisible */
 		}
             body{
-                background: linear-gradient(to bottom right, #ffffff 0%, #ff0000 100%);
+                background: linear-gradient(to bottom, #ffffff 0%, #ff0000 100%);
                 height: 100vh;
                 background-size: cover;
                 font-family: 'Robosto';
@@ -39,9 +39,10 @@
             }
             .upp{
                 width: 100%;
-                height: 5%;
-                background-color: #f1f1f1;
+                height: 7%;
+                background-color: #ffffff;
                 margin-top: 2%;
+                padding-top: 10px;
                 font-size: 40px;
             }
         </style>
@@ -51,13 +52,13 @@
         <div class="right"><a onclick="change(3)"><i style="font-size: 6vh; color: #fff;" class="fa fa-arrow-circle-right"></i></a></div>
         <div class="left"><a onclick="change(-3)"><i style="font-size: 6vh; color: #fff;" class="fa fa-arrow-circle-left"></i></a></div>
         <div class="upp" >
-            <a class="btn" href="filtering.jsp" style="width:200px; font-size: 20px; background-color: #F56363; color: white; border-radius: 20px; margin-bottom: 18px;margin-left: 5%;">
+            <a class="btn" href="filtering.jsp" style="width:200px; font-size: 20px; background-color: #F56363; color: white; border-radius: 20px; margin-bottom: 18px;margin-left: 2%;">
                 Filter &nbsp;
                 <i class="fa fa-search"></i>
             </a>
             <div style="float:right">
-                <b>Want to Sell Car ?? &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></b>
-                <a class="btn" href="sellingForm.jsp" style="background-color: red; color: white; border-radius: 20px; margin-bottom: 18px;">Click Here</a>
+                <b>Want to Sell Car ?? &nbsp;&nbsp;&nbsp;</b>
+                <a class="btn" href="sellingForm.jsp" style="background-color: red; color: white; border-radius: 20px; margin-bottom: 18px; margin-right: 50px;">Click Here</a>
             </div>
         </div>
         
