@@ -73,7 +73,7 @@ public class login implements Servlet {
                     HttpServletRequest re=(HttpServletRequest) req;
                     HttpSession session=re.getSession();
                     session.setAttribute("username", name);
-                    session.setAttribute("query","SELECT * from CAR.CARINFO");
+                    session.setAttribute("query","SELECT * from CAR.CARINFO WHERE STATUS=true");
                     HttpServletResponse hsr=(HttpServletResponse)res;
                     hsr.sendRedirect("dashboard.jsp");
                 }

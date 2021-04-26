@@ -44,7 +44,7 @@
                                             <div class="form-group">
                                                     <label style="font-size: 30px;">Enter Email Id</label><br>
                                                     <input type="text" class="form-control" name="username" id="username"/>
-                                                    <i><span id="msg1" style="font-size: 20px;"></span></i>
+                                                    <i><span id="msg1" style="font-size: 15px; color: red;"></span></i>
                                             </div>
                                             <br>
                                             <div class="form-actions">

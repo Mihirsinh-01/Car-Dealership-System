@@ -57,6 +57,9 @@
 		input:hover{
 			border-color: #00ccff;
 		}
+                span{
+                    color: red;
+                }
 	</style>
 </head>
 <body style="font-family: 'Robosto'">
@@ -72,7 +75,7 @@
 			<div><img style="margin-left: 15%; margin-top: 10%;" src="images/otp.svg" width="70%"></div>
 			<div style="width: 40%; padding-top: 5%; height: 70%; ">
 				<!-- <center> -->
-					<form method="post" name="otp" onSubmit="return valid();">
+                                <form method="post" name="otp" onSubmit="return valid();" action="otpcheck">
 						<fieldset>
 							<legend>
 								<h1><font>Reset Password</font></h1>
@@ -82,7 +85,7 @@
 							</p>
 							<div class="form-group" style="width: 500px;">
 								<label>Enter One Time Password(OTP)</label>
-								<input type="text" class="form-control" name="username">
+								<input type="number" class="form-control" name="username">
 								<i><span id="msg1" style="font-size: 12px;"></span></i>
 							</div>
 							<div class="form-group" style="width: 500px;">
@@ -102,7 +105,6 @@
 							</div><br><br>
 						</fieldset>
 					</form>
-				<!-- </center> -->
 			</div>
 		</div>
 	</div>

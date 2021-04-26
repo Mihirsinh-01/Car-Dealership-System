@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register Account</title>
+    <title>Sell Car</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dropdown.css">
     <style type="text/css">
         input:hover{
             border-color: #00ccff;
@@ -18,78 +19,88 @@
         span{
             color: red;
         }
+        label{
+            font-weight: bold;
+        }
     </style>
 </head>
 <body style="font-family: 'Robosto'">
-    <nav class="navbar navbar-light bg-dark navbar-expand">
-      <div class="container-fluid" style=" margin-left: 10%;">
-        <a class="navbar-brand" href="index.html">
-            <font color="white" style="font-size: 30px; font-family: 'Robosto'"><i class="fa fa-car" style="color:#FF6363;"></i>&nbsp;&nbsp;&nbsp;CarDealership</font>
-        </a>
-      </div>
-    </nav>
+    <%@ include file="include/navigation.jsp" %>
+    <%
+        session.setAttribute("query","SELECT * from CAR.CARINFO WHERE STATUS=true");
+    %>
     <div style="width: 100%;">
         <div class="row">
-            <div><img style="margin-left: 15%; margin-top: 10%;" src="images/register.svg" width="85%"></div>
-            <div style="width: 50%; padding-top: 5%; padding-left: 10%; height: 70%; ">
+            <div><img style="margin-left: 15%; margin-top: 15%;" src="images/register.svg" width="85%"></div>
+            <div style="width: 50%; padding-top: 2%; padding-left: 10%; height: 70%; ">
                 <form method="post" action = "upload" enctype = "multipart/form-data">
                     <fieldset>
                         <legend>
                             <h1><font>Selling Form</font></h1>
                         </legend>
-                        <p>
+                        <div class="form-group"style="width: 500px;"><p>
                             <br>
-                        </p>
+                            </p>
+                        </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Car Image to Display</label>
-                            <input type = "file" class="form-control" id="file1" name = "file1"/>
+                            <input type = "file" class="form-control" id="file1" name = "file1" style="border: none;" accept=".png,.jpeg,.jpg"/>
                             <i><span id="msg1" style="font-size: 12px;"></span></i>
                         </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Other Car Images</label>
-                            <input type = "file" class="form-control" id="file2" name = "file2" multiple/>
+                            <input type = "file" class="form-control" id="file2" name = "file2" multiple style="border: none;" accept=".png,.jpeg,.jpg"/>
                             <i><span id="msg2" style="font-size: 12px;"></span></i>
-                        </div>
-                        <div class="form-group" style="width: 500px;">
-                            <label>Company Name</label>
-                            <input type="text" class="form-control" id="company_name" name="company_name">
-                            <i><span id="msg3" style="font-size: 12px;"></span></i>
-                        </div>
-                        <div class="form-group" style="width: 500px;">
+                        </div>                        
+                        <div class="form-group" style="width: 300px; float: right;">
                             <label>Model_name</label>
                             <input type="text" class="form-control" id="model_name" name="model_name">
                             <i><span id="msg4" style="font-size: 12px;"></span></i>
                         </div>
-                        <div class="form-group" style="width: 500px;">
+                        <div class="form-group" style="width: 300px;">
+                            <label>Company Name</label>
+                            <input type="text" class="form-control" id="company_name" name="company_name">
+                            <i><span id="msg3" style="font-size: 12px;"></span></i>
+                        </div>
+                        <div class="form-group" style="width: 300px; float: right;">
                             <label>Price</label>
                             <input type="number" min="0" step="0.01" class="form-control" id="price" name="price">
                             <i><span id="msg5" style="font-size: 12px;"></span></i>
                         </div>
-                        <div class="form-group" style="width: 500px;">
+                        <div class="form-group" style="width: 300px;">
                             <label>Kilometer</label>
                             <input type="number" min="0" step="0.01" class="form-control" id="kilometer" name="kilometer">
                             <i><span id="msg6" style="font-size: 12px;"></span></i>
                         </div>
-                        <div class="form-group" style="width: 500px;">
+                        <div class="form-group" style="width: 300px; float: right;">
                             <label>Number Plate</label>
                             <input type=text class="form-control" id="number_plate" name="number_plate">
                             <i><span id="msg7" style="font-size: 12px;"></span></i>
                         </div>
-                        <div class="form-group" style="width: 500px;">
+                        <div class="form-group" style="width: 300px;">
                             <label>Model Year</label>
-                            <input type="number" step="1" class="form-control" id="model_year" name="model_year">
+                            <input type="number" min="1111" max="9999" step="1" class="form-control" id="model_year" name="model_year">
                             <i><span id="msg8" style="font-size: 12px;"></span></i>
                         </div>
-                        <div class="form-group" style="width: 500px;">
+                        <div class="form-group" style="width: 300px; float: right;">
                             <label>Mileage</label>
                             <input type="number" min="0" step="0.01"class="form-control" id="mileage" name="mileage">
                             <i><span id="msg9" style="font-size: 12px;"></span></i>
                         </div>
-                        <div class="form-group" style="width: 500px;">
+                        <div class="form-group" style="width: 300px;">
                             <label>Fuel Type</label><br>
-                            <label class="radio radio-info radio-inline"><input type="radio"  id="petrol" name="fuel_type"  value="Petrol" checked>Petrol</label>
-                            <label class="radio radio-info radio-inline"><input type="radio"  id="diesel" name="fuel_type" value="Diesel">Diesel</label>
-                            <label class="radio radio-info radio-inline"><input type="radio"  id="cng" name="fuel_type" value="CNG">CNG</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio"  id="petrol" name="fuel_type"  value="Petrol" checked>
+                                <label class="form-check-label" style="font-weight: normal;">Petrol</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio"  id="diesel" name="fuel_type"  value="Diesel">
+                                <label class="form-check-label" style="font-weight: normal;">Diesel</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio"  id="cng" name="fuel_type"  value="CNG">
+                                <label class="form-check-label" style="font-weight: normal;">CNG</label>
+                            </div>                           
                             
                             <i><span id="msg10" style="font-size: 12px;"></span></i>
                         </div><br>

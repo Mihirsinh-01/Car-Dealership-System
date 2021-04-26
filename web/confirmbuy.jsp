@@ -39,6 +39,7 @@
             <sql:query dataSource="${db}" var="rs">  
                 SELECT * from CAR.CARINFO WHERE NUMBER_PLATE='<c:out value="${param.number_plate}"/>'
             </sql:query>
+            
                 <center>
                     <div><table id="invoice" style="background-color: white; height: 60%; width: 50%; margin-top: 5%;" border="1" >
                     <tr style="height: 100px;">
@@ -49,6 +50,10 @@
                     </td>
                 </tr>
                 <c:forEach var="table" items="${rs.rows}">
+                    <c:set var="seller_name" value="${table.username}"/>
+                    
+                    
+                    
                     <tr style="height: 60px; font-size: 20px;">
                         <th style="padding: 10px; "> Seller </th>
                         <td style="padding: 10px;"><c:out value="${table.username}"/></td>
@@ -79,9 +84,17 @@
                         <td colspan="4"><center>In case of any query contact <a href="#">support.cardealership@gmail.com</a></center></td>
                     </tr>
                 </c:forEach>
+                
                     
                     </table>
                     </div></center>
+                <sql:update dataSource="${db}" var="count">  
+                    INSERT INTO CAR.HISTORY VALUES('<c:out value="${param.number_plate}"/>','<%=session.getAttribute("username") %>','<c:out value="${seller_name}"/>')  
+                </sql:update>
+                <sql:update dataSource="${db}" var="count">  
+                    UPDATE CAR.CARINFO SET STATUS = false WHERE NUMBER_PLATE = '<c:out value="${param.number_plate}"/>' and STATUS=true
+                </sql:update>
+                
                 <a class="btn btn-primary" style="color: white;" id="download">Print Receipt</a>                    
         </div>
             <script>

@@ -5,6 +5,7 @@
  */
 package CarDealer;
 
+import static CarDealer.register.username_validation2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -48,6 +49,8 @@ public class upload extends HttpServlet {
         HttpSession session=request.getSession();
         String u_name=(String)session.getAttribute("username");
         
+        Boolean submit=true;
+        
         String jdbcurl="jdbc:derby://localhost:1527/CarDealership";
         String username = "car";
         String password = "car";
@@ -68,6 +71,43 @@ public class upload extends HttpServlet {
         Double price=Double.parseDouble(t3);
         Integer kilometer=Integer.parseInt(t4);
         
+        RequestDispatcher rd = request.getRequestDispatcher("sellingForm.jsp");
+        rd.include(request, response);
+        
+        out.print("<script>"
+                    + "document.getElementById(\"company_name\").value=\""+company_name+"\";"
+                    + "document.getElementById(\"model_name\").value=\""+ model_name+"\";"
+                    + "document.getElementById(\"price\").value=\""+price+"\";"
+                    + "document.getElementById(\"kilometer\").value=\""+kilometer+"\";"
+                    + "document.getElementById(\"number_plate\").value=\""+number_plate+"\";"
+                    + "document.getElementById(\"model_year\").value=\""+model_year+"\";"
+                    + "document.getElementById(\"mileage\").value=\""+mileage+"\";"
+                    + "</script>");
+        
+        if(fuel_type.equals("Petrol"))out.print("<script>document.getElementById(\"petrol\").checked=true;</script>");
+	else if(fuel_type.equals("Diesel"))out.print("<script>document.getElementById(\"diesel\").checked=true;</script>");
+        else out.print("<script>document.getElementById(\"cng\").checked=true;</script>");
+        
+        if(!company_validation(company_name)){
+            submit=false;
+            out.print("<script>"
+                + "document.getElementById(\"msg3\").innerHTML=\"Only Alphabets are allowed !!!\";"
+                + "</script>");
+        }
+        if(!model_validation(model_name)){
+            submit=false;
+            out.print("<script>"
+                + "document.getElementById(\"msg4\").innerHTML=\"Only Alphabets and numbers are allowed !!!\";"
+                + "</script>");
+        }
+        if(!plate_validation(number_plate)){
+            submit=false;
+            out.print("<script>"
+                + "document.getElementById(\"msg7\").innerHTML=\"Invalid number plate\";"
+                + "</script>");
+        }
+        
+        
         String path=getServletContext().getRealPath(File.separator);
         path=path.substring(0,path.lastIndexOf("build"));
         path=path+"web"+File.separator+"files"+File.separator;
@@ -82,77 +122,121 @@ public class upload extends HttpServlet {
             array.add(Integer.parseInt(tmp));
         }
         Collections.sort(array);
-//        for(int i=0;i<array.size();i++){
-//            System.out.println(array.get(i));
-//        }
-        Integer x=1;
-        int i=0;
+//        
         for(Part part:request.getParts()){
             if(!part.getName().equals("file1") && !part.getName().equals("file2"))continue;
-            for ( ; i < array.size(); i++,x++) {
-                if(x!=array.get(i))break;
-            }
-            String filePath=path+(x.toString()+".jpeg");
-            if(!part.getName().equals("file1")){
-                car_image_array.add(x.toString()+".jpeg");
-            }
-            else{
-                display_img=x.toString()+".jpeg";
-            }
-            
-//            System.out.println(x+"value");
-            InputStream is=part.getInputStream();
-            File file=new File(filePath);
-            uploadFile(is,file);
-            x++;
-//            out.print(path);
-        }
-        
-        try {
-            Class.forName(driverclassname);
-            Connection Con = DriverManager.getConnection(jdbcurl, username, password);
-            Statement st = Con.createStatement();
-        
-            System.out.println("Connection Created");
-            
-            String check="SELECT * FROM CAR.\"CARINFO\" WHERE USERNAME ='"+u_name+"' and NUMBER_PLATE='"+number_plate+"' and STATUS=true";
-            ResultSet rs;
-            int flag=0;
-            try {
-                rs = st.executeQuery(check);
-                while(rs.next()){
-                    flag=1;
-                    break;
+            boolean flag=true;
+            for (String cd : part.getHeader("content-disposition").split(";")) {
+                if (cd.trim().startsWith("filename")) {
+                    String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                    filename=filename.toLowerCase();
+                    System.out.println(filename);
+                    if(!filename.trim().endsWith(".png") && !filename.trim().endsWith(".jpg") && !filename.trim().endsWith(".jpeg")){
+                        submit=false;
+                        flag=false;
+                    }
                 }
-                if(flag==1){
-                    out.print("<script>alert(\"This car is already in sell !!!\");</script>");
-                    RequestDispatcher rd = request.getRequestDispatcher("sellingForm.jsp");
-                    rd.include(request, response);
+            }
+            if(!flag){
+                submit=false;
+                if(part.getName().equals("file1")){
+                    out.print("<script>"
+                        + "document.getElementById(\"msg1\").innerHTML=\"Only .png, .jpg, .jpeg is accepted !!!!\";"
+                        + "</script>");
                 }
                 else{
-                    String car_image=String.join(";",car_image_array); 
-                    String query="INSERT INTO CAR.\"CARINFO\" VALUES('"+number_plate+"','"+u_name+"',true,"+model_year+
-                           ",'"+company_name+"','"+model_name+"',"+mileage+",'"+car_image+"',"+price+","+kilometer+",'"+fuel_type+"','"+display_img+"')";
-                   
-                    try {
-                        st.executeUpdate(query);
-                    } catch (SQLException ex) {
-                        System.out.println(query);
-                        System.out.println("error");
+                    out.print("<script>"
+                        + "document.getElementById(\"msg2\").innerHTML=\"Only .png, .jpg, .jpeg is accepted !!!!\";"
+                        + "</script>");
+                }   
+            }
+            
+        }
+        if(submit){
+            try {
+                Class.forName(driverclassname);
+                Connection Con = DriverManager.getConnection(jdbcurl, username, password);
+                Statement st = Con.createStatement();
+
+                System.out.println("Connection Created");
+
+                String check="SELECT * FROM CAR.\"CARINFO\" WHERE USERNAME ='"+u_name+"' and NUMBER_PLATE='"+number_plate+"' and STATUS=true";
+                ResultSet rs;
+                int flag=0;
+                try {
+                    rs = st.executeQuery(check);
+                    while(rs.next()){
+                        flag=1;
+                        break;
+                    }
+                    if(flag==1){
+                        out.print("<script>alert(\"This car is already in sell !!!\");</script>");
+                    }
+                    else{
+                        Integer x=1;
+                        int i=0;
+                        for(Part part:request.getParts()){
+                            if(!part.getName().equals("file1") && !part.getName().equals("file2"))continue;
+                            for ( ; i < array.size(); i++,x++) {
+                                if(x!=array.get(i))break;
+                            }
+                            String extension="no";
+                            for (String cd : part.getHeader("content-disposition").split(";")) {
+                                if (cd.trim().startsWith("filename")) {
+                                    String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                                    filename=filename.toLowerCase();
+                                    System.out.println(filename);
+                //                    return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
+                                    if (filename.trim().endsWith(".png")){
+                                        extension=".png";
+                                    }
+                                    else if (filename.trim().endsWith(".jpg")){
+                                        extension=".jpg";
+                                    }
+                                    else if (filename.trim().endsWith(".jpeg")){
+                                        extension=".jpeg";
+                                    }
+                                }
+                //                System.out.println(cd);
+                            }
+
+                            String filePath=path+(x.toString()+extension);
+                            if(part.getName().equals("file1")){
+                                display_img=x.toString()+extension;
+                            }
+                            car_image_array.add(x.toString()+extension);
+                            
+
+                //            System.out.println(x+"value");
+                            InputStream is=part.getInputStream();
+                            File file=new File(filePath);
+                            uploadFile(is,file);
+                            x++;
+                //            out.print(path);
+                        }
+                        String car_image=String.join(";",car_image_array); 
+                        String query="INSERT INTO CAR.\"CARINFO\" VALUES('"+number_plate+"','"+u_name+"',true,"+model_year+
+                               ",'"+company_name+"','"+model_name+"',"+mileage+",'"+car_image+"',"+price+","+kilometer+",'"+fuel_type+"','"+display_img+"')";
+
+                        try {
+                            st.executeUpdate(query);
+                            response.sendRedirect("dashboard.jsp");
+                        } catch (SQLException ex) {
+                            System.out.println(query);
+                            System.out.println("error");
+                        }                        
+
                     }
 
-                    RequestDispatcher rd = request.getRequestDispatcher("sellingForm.jsp");
-                    rd.forward(request, response); 
+                } catch (SQLException ex) {
+                    Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             } catch (SQLException ex) {
-                Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+    //            System.out.println("klnjk");
             }
-        } catch (SQLException ex) {
-//            System.out.println("klnjk");
-        }
-        catch(ClassNotFoundException ex){
-//            System.out.println("hiihih");
+            catch(ClassNotFoundException ex){
+    //            System.out.println("hiihih");
+            }
         }
         
         
@@ -166,8 +250,7 @@ public class upload extends HttpServlet {
 //        System.out.println(kilometer);
         
         
-        RequestDispatcher rd=request.getRequestDispatcher("sellingForm.jsp");
-        rd.include(request, response);
+        
         
         
     }
@@ -179,6 +262,20 @@ public class upload extends HttpServlet {
                 outputStream.write(bytes, 0, read);
             }
         }
+    }
+    static boolean company_validation(String company) {
+        String regex = "^[a-zA-Z]+$";
+        return company.matches(regex);
+    }
+    
+    static boolean model_validation(String model) {
+        String regex = "^[a-zA-Z0-9]+$";
+        return model.matches(regex);
+    }
+    
+    static boolean plate_validation(String plate) {
+        String regex = "^[a-zA-Z][a-zA-Z][0-9][0-9][a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9]$";
+        return plate.matches(regex);
     }
     
     @Override

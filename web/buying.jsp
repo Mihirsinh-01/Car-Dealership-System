@@ -37,7 +37,7 @@
                 padding-right: 10%;
                 padding-top: 5%;
             }
-            .btn{
+            .bttt{
                 background-color: red;
                 font-size: 30px;
                 border-radius: 20px;
@@ -94,7 +94,7 @@
                     </tr>
                     <div class="pr">
                         <b>Price: </b>₹ <c:out value="${table.PRICE}"/> <br>
-                        <a class="btn"style="color: white;" href="confirmbuy.jsp?number_plate=<c:out value='${table.NUMBER_PLATE}'/>">Confirm Buy</a>
+                        <a class="btn bttt"style="color: white;" href="confirmbuy.jsp?number_plate=<c:out value='${table.NUMBER_PLATE}'/>">Confirm Buy</a>
                     </div>
                 </c:forEach>
             </table>
