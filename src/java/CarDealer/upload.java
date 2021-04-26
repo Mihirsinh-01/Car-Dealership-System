@@ -65,7 +65,6 @@ public class upload extends HttpServlet {
         String t4=request.getParameter("kilometer");
         String fuel_type=request.getParameter("fuel_type");
         String display_img="";
-        
         Integer model_year=Integer.parseInt(t1);
         Double mileage=Double.parseDouble(t2);
         Double price=Double.parseDouble(t3);
@@ -91,19 +90,22 @@ public class upload extends HttpServlet {
         if(!company_validation(company_name)){
             submit=false;
             out.print("<script>"
-                + "document.getElementById(\"msg3\").innerHTML=\"Only Alphabets are allowed !!!\";"
+                + "var x=document.getElementById(\"msg3\");"
+                + " x.style.visibility = 'visible';"
                 + "</script>");
         }
         if(!model_validation(model_name)){
             submit=false;
             out.print("<script>"
-                + "document.getElementById(\"msg4\").innerHTML=\"Only Alphabets and numbers are allowed !!!\";"
+                + "var x=document.getElementById(\"msg4\");"
+                + " x.style.visibility = 'visible';"
                 + "</script>");
         }
         if(!plate_validation(number_plate)){
             submit=false;
             out.print("<script>"
-                + "document.getElementById(\"msg7\").innerHTML=\"Invalid number plate\";"
+                + "var x=document.getElementById(\"msg7\");"
+                + " x.style.visibility = 'visible';"
                 + "</script>");
         }
         
@@ -141,12 +143,14 @@ public class upload extends HttpServlet {
                 submit=false;
                 if(part.getName().equals("file1")){
                     out.print("<script>"
-                        + "document.getElementById(\"msg1\").innerHTML=\"Only .png, .jpg, .jpeg is accepted !!!!\";"
+                        + "var x=document.getElementById(\"msg1\");"
+                        + "x.style.visibility = 'visible';"
                         + "</script>");
                 }
                 else{
                     out.print("<script>"
-                        + "document.getElementById(\"msg2\").innerHTML=\"Only .png, .jpg, .jpeg is accepted !!!!\";"
+                        + "var x=document.getElementById(\"msg2\");"
+                        + "x.style.visibility = 'visible';"
                         + "</script>");
                 }   
             }
@@ -269,7 +273,7 @@ public class upload extends HttpServlet {
     }
     
     static boolean model_validation(String model) {
-        String regex = "^[a-zA-Z0-9]+$";
+        String regex = "^[a-zA-Z0-9 ]+$";
         return model.matches(regex);
     }
     

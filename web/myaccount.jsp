@@ -17,6 +17,10 @@
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/dropdown.css">
         <style>
+            ::-webkit-scrollbar {
+		    width: 0px;  /* Remove scrollbar space */
+		    background: transparent;  /* Optional: just make scrollbar invisible */
+		}
             .usr{
                 color: white;
                 font-size: 50px;
@@ -105,9 +109,36 @@
                     <td>
                         <%=session.getAttribute("username")%>
                     </td>
-                    <td> To Be Sold</td>
+                    <td> Bought</td>
                 </tr>
             </c:forEach>
+            <sql:query dataSource="${db}" var="rs">  
+                SELECT * FROM CAR.HISTORY WHERE SELLER='<%=session.getAttribute("username")%>'
+            </sql:query>
+            <c:forEach var="table" items="${rs.rows}">
+                <tr>
+                    <td>
+                        <c:out value="${table.number_Plate}"/>
+                    </td>
+                    <td>
+                        <sql:query dataSource="${db}" var="rs1">  
+                            SELECT * FROM CAR.CARINFO WHERE NUMBER_PLATE='<c:out value="${table.number_Plate}"/>'
+                        </sql:query>
+                        <c:forEach var="table1" items="${rs1.rows}">
+                            <c:out value="${table1.Company_Name}"/>
+                            <c:out value="${table1.Model_Name}"/>
+                        </c:forEach>
+                    </td>
+                    <td>
+                        <c:out value="${table.Seller}"/>
+                    </td>
+                    <td>
+                        <c:out value="${table.Buyer}"/>
+                    </td>
+                    <td>Sold</td>
+                </tr>
+            </c:forEach>
+                </tbody>
             </table>
         <div>
             

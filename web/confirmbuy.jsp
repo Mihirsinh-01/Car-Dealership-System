@@ -18,6 +18,10 @@
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/dropdown.css">
         <style>
+            ::-webkit-scrollbar {
+		    width: 0px;  /* Remove scrollbar space */
+		    background: transparent;  /* Optional: just make scrollbar invisible */
+		}
             #print{
                 position: absolute;
                 top: 80%;
@@ -50,8 +54,21 @@
                     </td>
                 </tr>
                 <c:forEach var="table" items="${rs.rows}">
-                    <c:set var="seller_name" value="${table.username}"/>
-                    
+                    <c:set var="seller_name" value="${table.username}"/>   
+                    <jsp:useBean id="seller_name" type="java.lang.String" />
+                    <c:set var="seller" value='<%=session.getAttribute("username")%>'/>   
+                    <jsp:useBean id="seller" type="java.lang.String" />
+                    <c:if test='<%=seller_name.equals(seller)%>'>
+                        <%  
+                            
+                            out.println("<script type=\"text/javascript\">");
+                            out.println("alert('You cannot buy your own Car');");
+                            out.println("location='dashboard.jsp';");
+                            out.println("</script>");
+                            
+                            if(true)return;
+                        %>                       
+                    </c:if>
                     
                     
                     <tr style="height: 60px; font-size: 20px;">
@@ -70,13 +87,13 @@
                                 <tr><th>Model Year</th><td><c:out value="${table.model_year}"/></td></tr>
                                 <tr><th>Fuel Type</th><td><c:out value="${table.fuel_type}"/></td></tr>
                                 <tr><th>Number Plate</th><td><c:out value="${table.number_plate}"/></td></tr>
-                                <tr><th>Total Kilometers</th><td><c:out value="${table.kilometer}"/></td></tr>
+                                <tr><th>Total Kilometers</th><td><c:out value="${table.kilometer}"/> Km</td></tr>
                             </table>
                         </td>
                         <td>
                             <table style="font-size: 30px; float: bottom;" >
                                 <tr><th>Total Price: </th></tr>
-                                <tr><td><c:out value="${table.price}"/></td></tr>
+                                <tr><td>₹ <c:out value="${table.price}"/></td></tr>
                             </table>
                         </td>
                     </tr>
@@ -84,16 +101,17 @@
                         <td colspan="4"><center>In case of any query contact <a href="#">support.cardealership@gmail.com</a></center></td>
                     </tr>
                 </c:forEach>
-                
-                    
+                <%--<c:if test='<%=flag.equals("no")%>'>--%>
+                    <sql:update dataSource="${db}" var="count">  
+                    INSERT INTO CAR.HISTORY VALUES('<c:out value="${param.number_plate}"/>','<%=session.getAttribute("username") %>','<c:out value="${seller_name}"/>')  
+                    </sql:update>
+                   <sql:update dataSource="${db}" var="count">  
+                        UPDATE CAR.CARINFO SET STATUS = false WHERE NUMBER_PLATE = '<c:out value="${param.number_plate}"/>' and STATUS=true
+                    </sql:update>
+                        <%--</c:if>--%>
                     </table>
                     </div></center>
-                <sql:update dataSource="${db}" var="count">  
-                    INSERT INTO CAR.HISTORY VALUES('<c:out value="${param.number_plate}"/>','<%=session.getAttribute("username") %>','<c:out value="${seller_name}"/>')  
-                </sql:update>
-                <sql:update dataSource="${db}" var="count">  
-                    UPDATE CAR.CARINFO SET STATUS = false WHERE NUMBER_PLATE = '<c:out value="${param.number_plate}"/>' and STATUS=true
-                </sql:update>
+               
                 
                 <a class="btn btn-primary" style="color: white;" id="download">Print Receipt</a>                    
         </div>

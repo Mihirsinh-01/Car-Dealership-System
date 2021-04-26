@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/dropdown.css">
     <style type="text/css">
+        ::-webkit-scrollbar {
+		    width: 0px;  /* Remove scrollbar space */
+		    background: transparent;  /* Optional: just make scrollbar invisible */
+		}
         input:hover{
             border-color: #00ccff;
         }
@@ -26,7 +30,7 @@
     <div style="width: 100%;">
         <div class="row">
             <div><img style="margin-left: 15%; margin-top: 10%;" src="images/register.svg" width="85%"></div>
-            <div style="width: 50%; padding-top: 5%; padding-left: 10%; height: 70%; ">
+            <div style="width: 50%; padding-top: 5%; padding-left: 10%; height: 100%; ">
                 <form method="post" action = "filtering">
                     <fieldset>
                         <legend>
@@ -56,13 +60,31 @@
                         </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Fuel Type</label><br>
-                            <label class="checkbox checkbox-info checkbox-inline"><input type="checkbox"  id="petrol" name="fuel_type"  value="Petrol">Petrol</label>
-                            <label class="checkbox checkbox-info checkbox-inline"><input type="checkbox"  id="diesel" name="fuel_type" value="Diesel">Diesel</label>
-                            <label class="checkbox checkbox-info checkbox-inline"><input type="checkbox"  id="cng" name="fuel_type" value="CNG">CNG</label>
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="petrol" name="fuel_type"  value="Petrol">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Petrol
+                            </label>
+                            </div>
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="diesel" name="fuel_type" value="Diesel">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Diesel
+                            </label>
+                            </div>
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="cng" name="fuel_type" value="CNG">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              CNG
+                            </label>
+                            </div>
                             
-                        </div><br>
+                        </div>
+                            
+                            
+                        <br>
                         <div class="form-actions">
-                            <button type="submit" name="submit" style="padding-top: 0px;">
+                            <button type="submit" name="submit">
                                 Filter
                             </button>
                         </div><br><br>

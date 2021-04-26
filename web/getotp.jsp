@@ -54,6 +54,10 @@
 		}
 	</script>
 	<style type="text/css">
+            ::-webkit-scrollbar {
+		    width: 0px;  /* Remove scrollbar space */
+		    background: transparent;  /* Optional: just make scrollbar invisible */
+		}
 		input:hover{
 			border-color: #00ccff;
 		}

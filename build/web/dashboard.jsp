@@ -71,7 +71,7 @@
         <div class="row" style="margin-left: 4%; margin-top: 5%;">
         <c:forEach var="table" items="${rs.rows}">  
             <div class="card" style="width: 30%; margin: 1%">
-            <img class="card-img-top" src='files/<c:out value="${table.DISPLAY_IMAGE}"/>' alt="Car image" height="450px">
+                <img class="card-img-top" src='files/<c:out value="${table.DISPLAY_IMAGE}"/>' height="450px" onerror="javascript: location.reload();">
             <div class="card-body">
                 <h5 class="card-title"><b><c:out value="${table.Company_Name}"/>&nbsp; <c:out value="${table.Model_Name}"/></b></h5>
               <p class="card-text">

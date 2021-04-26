@@ -17,6 +17,10 @@
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/dropdown.css">
         <style>
+            ::-webkit-scrollbar {
+		    width: 0px;  /* Remove scrollbar space */
+		    background: transparent;  /* Optional: just make scrollbar invisible */
+		}
             .right{
                 position: absolute;
                 right: 1%;

@@ -22,6 +22,10 @@
         label{
             font-weight: bold;
         }
+        ::-webkit-scrollbar {
+            width: 0px;  /* Remove scrollbar space */
+            background: transparent;  /* Optional: just make scrollbar invisible */
+        }
     </style>
 </head>
 <body style="font-family: 'Robosto'">
@@ -45,47 +49,47 @@
                         <div class="form-group" style="width: 500px;">
                             <label>Car Image to Display</label>
                             <input type = "file" class="form-control" id="file1" name = "file1" style="border: none;" accept=".png,.jpeg,.jpg"/>
-                            <i><span id="msg1" style="font-size: 12px;"></span></i>
+                            <i><span id="msg1" style="font-size: 12px;visibility: hidden;">Only .png, .jpg, .jpeg is accepted !!!!</span></i>
                         </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Other Car Images</label>
                             <input type = "file" class="form-control" id="file2" name = "file2" multiple style="border: none;" accept=".png,.jpeg,.jpg"/>
-                            <i><span id="msg2" style="font-size: 12px;"></span></i>
+                            <i><span id="msg2" style="font-size: 12px;visibility: hidden;">Only .png, .jpg, .jpeg is accepted !!!!</span></i>
                         </div>                        
                         <div class="form-group" style="width: 300px; float: right;">
                             <label>Model_name</label>
                             <input type="text" class="form-control" id="model_name" name="model_name">
-                            <i><span id="msg4" style="font-size: 12px;"></span></i>
+                            <i><span id="msg4" style="font-size: 12px;visibility: hidden;">Only Alphabets and numbers are allowed !!!</span></i>
                         </div>
                         <div class="form-group" style="width: 300px;">
                             <label>Company Name</label>
                             <input type="text" class="form-control" id="company_name" name="company_name">
-                            <i><span id="msg3" style="font-size: 12px;"></span></i>
+                            <i><span id="msg3" style="font-size: 12px;visibility: hidden;">Only Alphabets are allowed !!!</span></i>
                         </div>
                         <div class="form-group" style="width: 300px; float: right;">
                             <label>Price</label>
-                            <input type="number" min="0" step="0.01" class="form-control" id="price" name="price">
-                            <i><span id="msg5" style="font-size: 12px;"></span></i>
+                            <input type="number" min="0" step="0.01" class="form-control" id="price" name="price" required>
+                            <i><span id="msg5" style="font-size: 12px;visibility: hidden;">Invalid Price</span></i>
                         </div>
                         <div class="form-group" style="width: 300px;">
                             <label>Kilometer</label>
-                            <input type="number" min="0" step="0.01" class="form-control" id="kilometer" name="kilometer">
-                            <i><span id="msg6" style="font-size: 12px;"></span></i>
+                            <input type="number" min="0" step="0.01" class="form-control" id="kilometer" name="kilometer" required>
+                            <i><span id="msg6" style="font-size: 12px;visibility: hidden;">Invalid kilometer</span></i>
                         </div>
                         <div class="form-group" style="width: 300px; float: right;">
                             <label>Number Plate</label>
-                            <input type=text class="form-control" id="number_plate" name="number_plate">
-                            <i><span id="msg7" style="font-size: 12px;"></span></i>
+                            <input type=text class="form-control" id="number_plate" name="number_plate" placeholder="GJ05AB1234">
+                            <i><span id="msg7" style="font-size: 12px;visibility: hidden;">Invalid number plate</span></i>
                         </div>
                         <div class="form-group" style="width: 300px;">
                             <label>Model Year</label>
-                            <input type="number" min="1111" max="9999" step="1" class="form-control" id="model_year" name="model_year">
-                            <i><span id="msg8" style="font-size: 12px;"></span></i>
+                            <input type="number" min="1111" max="9999" step="1" class="form-control" id="model_year" name="model_year" required>
+                            <i><span id="msg8" style="font-size: 12px;visibility: hidden;">Invalid year</span></i>
                         </div>
                         <div class="form-group" style="width: 300px; float: right;">
                             <label>Mileage</label>
-                            <input type="number" min="0" step="0.01"class="form-control" id="mileage" name="mileage">
-                            <i><span id="msg9" style="font-size: 12px;"></span></i>
+                            <input type="number" min="0" step="0.01"class="form-control" id="mileage" name="mileage" required>
+                            <i><span id="msg9" style="font-size: 12px;visibility: hidden;"></span></i>
                         </div>
                         <div class="form-group" style="width: 300px;">
                             <label>Fuel Type</label><br>
