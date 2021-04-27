@@ -69,9 +69,9 @@ public class forgotpassword extends HttpServlet {
                 hs.setAttribute("email", email);
                 final String messg ="OTP for your Password RESET Request is "+otp;
 
-                final String from = "noreply.cardealership@gmail.com";
+                final String from = "Your Email";
 
-                final String pass = "alpqpsj34hdf7343n";
+                final String pass = "Your Password";
 
                 String host = "smtp.gmail.com";
 
