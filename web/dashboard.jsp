@@ -14,6 +14,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
         <link rel="stylesheet" href="css/styles.css">   
         <link rel="stylesheet" href="css/dropdown.css">
         <style>
@@ -45,17 +47,30 @@
                 padding-top: 10px;
                 font-size: 40px;
             }
+            .no-js #loader { display: none;  }
+            .js #loader { display: block; position: absolute; left: 100px; top: 0; }
+            .se-pre-con {
+                    position: fixed;
+                    left: 0px;
+                    top: 0px;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 9999;
+                    background: url("images/loading.gif") center no-repeat #fff;
+            }
         </style>
     </head>
     <body>
         <%@ include file="include/navigation.jsp" %>
+        <div class="se-pre-con"></div>
         <div class="right"><a onclick="change(3)"><i style="font-size: 6vh; color: #fff;" class="fa fa-arrow-circle-right"></i></a></div>
         <div class="left"><a onclick="change(-3)"><i style="font-size: 6vh; color: #fff;" class="fa fa-arrow-circle-left"></i></a></div>
         <div class="upp" >
-            <a class="btn" href="filtering.jsp" style="width:200px; font-size: 20px; background-color: #F56363; color: white; border-radius: 20px; margin-bottom: 18px;margin-left: 2%;">
+            <a class="btn" href="filtering.jsp" style="width:200px; font-size: 20px; float: left; background-color: #F56363; color: white; border-radius: 20px; margin-bottom: 18px;margin-left: 2%;">
                 Filter &nbsp;
                 <i class="fa fa-search"></i>
             </a>
+            <a href="clear.jsp" style="font-size: 20px; border: 1px solid; border-radius: 5px;color: black; margin-left: 10px;"><i class="fa fa-times"> Clear Filters</i></a>
             <div style="float:right">
                 <b>Want to Sell Car ?? &nbsp;&nbsp;&nbsp;</b>
                 <a class="btn" href="sellingForm.jsp" style="background-color: red; color: white; border-radius: 20px; margin-bottom: 18px; margin-right: 50px;">Click Here</a>
@@ -125,6 +140,10 @@
                 x[(pos+1)%x.length].style.display="inline";
                 x[(pos+2)%x.length].style.display="inline";
             }
+            $(window).load(function() {
+                    // Animate loader off screen
+                    $(".se-pre-con").fadeOut("slow");;
+            });
         </script>
     </body>
 </html>

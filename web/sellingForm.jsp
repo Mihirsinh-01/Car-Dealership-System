@@ -36,7 +36,7 @@
     <div style="width: 100%;">
         <div class="row">
             <div><img style="margin-left: 15%; margin-top: 15%;" src="images/register.svg" width="85%"></div>
-            <div style="width: 50%; padding-top: 2%; padding-left: 10%; height: 70%; ">
+            <div style="width: 50%; padding-top: 1%; padding-left: 10%; height: 70%; ">
                 <form method="post" action = "upload" enctype = "multipart/form-data">
                     <fieldset>
                         <legend>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="form-group" style="width: 300px; float: right;">
                             <label>Number Plate</label>
-                            <input type=text class="form-control" id="number_plate" name="number_plate" placeholder="GJ05AB1234">
+                            <input type=text class="form-control" id="number_plate" name="number_plate" placeholder="XX00XX0000">
                             <i><span id="msg7" style="font-size: 12px;visibility: hidden;">Invalid number plate</span></i>
                         </div>
                         <div class="form-group" style="width: 300px;">

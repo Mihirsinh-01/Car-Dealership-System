@@ -90,6 +90,12 @@ public class filtering extends HttpServlet {
             query+=")";
             
         }
+        if(price_sort.equals("ascending")){
+            query+=" ORDER BY PRICE ASC";
+        }
+        else{
+            query+=" ORDER BY PRICE DESC";
+        }
         HttpSession session=request.getSession();
         session.setAttribute("query",query);
         response.sendRedirect("dashboard.jsp");

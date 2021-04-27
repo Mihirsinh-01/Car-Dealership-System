@@ -55,8 +55,8 @@
                             <i><span id="msg5" style="font-size: 12px;"></span></i>
                         </div>
                         <div class="form-group" style="width: 500px;">
-                            <label class="radio radio-info radio-inline"><input type="radio"  id="ascending" name="price_sort"  value="ascending" checked>Ascending</label>
-                            <label class="radio radio-info radio-inline"><input type="radio"  id="descending" name="price_sort" value="descending">Descending</label>
+                            <label class="radio radio-info radio-inline"><input type="radio"  id="ascending" name="price_sort"  value="ascending" checked>Price Low to High</label>
+                            <label class="radio radio-info radio-inline"><input type="radio"  id="descending" name="price_sort" value="descending">Price High to Low</label>
                         </div>
                         <div class="form-group" style="width: 500px;">
                             <label>Fuel Type</label><br>
