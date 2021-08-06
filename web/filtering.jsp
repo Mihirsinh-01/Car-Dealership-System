@@ -34,7 +34,7 @@
                 <form method="post" action = "filtering">
                     <fieldset>
                         <legend>
-                            <h1><font>Selling Form</font></h1>
+                            <h1><font>Search Here</font></h1>
                         </legend>
                         <p>
                             <br>
